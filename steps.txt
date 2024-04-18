@@ -17,3 +17,14 @@ Pesquisar e Instalar:
 
 Criar uma pasta data - AppDbContext
 
+CRUD- Create Read update delete
+
+Criar ConnnectionString no arquivo appsettings.json
+
+Criar o serviço de DbContext no Progam.csproj
+
+Criar um Controller - CRUD:
+dotnet-aspnet-codegenerator controller -name GenresController -m Genre -dc AppDbContext -outDir Controllers -udl
+
+Instalar pacotes:
+Microsoft.VisualStudio.Web.CodeGeneration.Design
