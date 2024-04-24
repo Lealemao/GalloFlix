@@ -13,7 +13,7 @@ namespace GalloFlix.Controllers
     public class GenresController : Controller
     {
         private readonly AppDbContext _context;
-
+        
         public GenresController(AppDbContext context)
         {
             _context = context;
