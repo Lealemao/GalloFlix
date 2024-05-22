@@ -26,15 +26,15 @@ public class Movie
 
     [Column(TypeName = "Year")]
     [Display(Name = "Ano de Estreia")]
-    public Int16 MovieYear { get; set; }
+    public Int16 MovieYear { get; set; }    
 
     [Column(TypeName = "smallint(3)")]
     [Display(Name = "Duração (em minutos)")]
-    [Required(ErrorMessage = "Por favor, informe a duração")]
-    public Int16 Duration { get; set; }
+    [Required(ErrorMessage = "Por favor, informe a Duração")]
+    public Int16 Duration { get; set; }    
 
     [Display(Name = "Classificação Etária")]
-    [Required(ErrorMessage = "Por Favor, informe a classificação etária")]
+    [Required(ErrorMessage = "Por favor, informe a Classificação Etária")]
     public sbyte AgeRating { get; set; }
 
     [StringLength(200)]
@@ -47,5 +47,5 @@ public class Movie
         return TimeSpan.FromMinutes(Duration).ToString(@"%h'h 'm'min'");
     } }
 
-    public ICollection<MovieGenre> Genres { get; set; }   
+    public ICollection<MovieGenre> Genres { get; set; }
 }

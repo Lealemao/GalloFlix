@@ -62,6 +62,7 @@ namespace GalloFlix.Controllers
             {
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
+
                 if (arquivo != null)
                 {
                     string nomeArquivo = movie.Id + Path.GetExtension(arquivo.FileName);
@@ -74,6 +75,7 @@ namespace GalloFlix.Controllers
                     movie.Image = "\\img\\movies\\" + nomeArquivo;
                     await _context.SaveChangesAsync();
                 }
+
                 return RedirectToAction(nameof(Index));
             }
             return View(movie);
@@ -111,24 +113,19 @@ namespace GalloFlix.Controllers
             {
                 try
                 {
-                    if (ModelState.IsValid)
+                    if (arquivo != null)
                     {
-                        _context.Add(movie);
-                        await _context.SaveChangesAsync();
-                        if (arquivo != null)
+                        string nomeArquivo = movie.Id + Path.GetExtension(arquivo.FileName);
+                        string caminho = Path.Combine(_host.WebRootPath, "img\\movies");
+                        string novoArquivo = Path.Combine(caminho, nomeArquivo);
+                        using (var stream = new FileStream(novoArquivo, FileMode.Create))
                         {
-                            string nomeArquivo = movie.Id + Path.GetExtension(arquivo.FileName);
-                            string caminho = Path.Combine(_host.WebRootPath, "img\\movies");
-                            string novoArquivo = Path.Combine(caminho, nomeArquivo);
-                            using (var stream = new FileStream(novoArquivo, FileMode.Create))
-                            {
-                                arquivo.CopyTo(stream);
-                            }
-                            movie.Image = "\\img\\movies\\" + nomeArquivo;
+                            arquivo.CopyTo(stream);
                         }
-                        _context.Update(movie);
-                        await _context.SaveChangesAsync();
+                        movie.Image = "\\img\\movies\\" + nomeArquivo;
                     }
+                    _context.Update(movie);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
